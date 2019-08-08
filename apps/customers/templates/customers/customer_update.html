@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}Customer{% endblock title %}
+{% load bootstrap3 %}
+
+{% block page_header_title %}
+    <div class="col-xs-7 page-header-content">
+        <i class="psi-calendar-4"></i>
+        {% if form.instance.id %}
+            {{ form.instance.id }}
+        {% else %}
+            New Customer
+        {% endif %}
+    </div>
+{% endblock page_header_title %}
+
+{% block js_top %}
+    {{ block.super }}
+    <script>
+        $(document).ready(function () {
+            $('#id_date').datetimepicker({format: 'L'});
+        });
+    </script>
+{% endblock js_top %}
+
+{% block page_content %}
+
+    <div class="panel col-sm-10 col-sm-offset-1">
+        <div class="panel-heading">
+            <h3 class="panel-title">Customer</h3>
+        </div>
+        <form action="" method="post" class="form">
+            <div class="panel-body">
+                {% csrf_token %}
+                <fieldset class="col-sm-6">
+                    {% bootstrap_field form.first_name %}
+                    {% bootstrap_field form.last_name %}
+                    {% bootstrap_field form.city %}
+                    {% bootstrap_field form.state %}
+                    {% bootstrap_field form.zip %}
+                    {% bootstrap_field form.phone %}
+                </fieldset>
+            </div>
+
+            <div class="panel-footer text-right">
+                {% bootstrap_button "Save" button_type="submit" name="save" button_class="btn btn-success" %}
+
+                {% if form.instance.pk %}
+                    <a href="{{ form.instance.get_absolute_url }}" class="btn btn-default btn-warning"> Cancel </a>
+                    <a href="{{ form.instance.get_delete_url }}" class="btn btn-default btn-danger"> Delete </a>
+                {% else %}
+                    <a href="{% url 'customers:customer_search' %}" class="btn btn-default btn-warning"> Cancel </a>
+                {% endif %}
+            </div>
+
+        </form>
+    </div>
+{% endblock page_content %}

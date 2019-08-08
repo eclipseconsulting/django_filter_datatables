@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load bootstrap3 %}
+
+{% block title %}{{ title }} - {{ object }}{% endblock %}
+
+{% block page_header_title %}
+{% endblock page_header_title %}
+
+{% block page_content %}
+    {#    <div class="row">#}
+    <div class="panel col-sm-8 col-sm-offset-2">
+        <div class="panel-heading">
+            <h3 class="panel-title">Confirm Deletion</h3>
+        </div>
+        <form action="" method="post" role="form">
+            <div class="panel-body">
+                {% csrf_token %}
+                <p>Are you sure you want to <span class="text-bold">delete</span> the record
+                    for {{ object }}?</p>
+            </div>
+            <div class="panel-footer text-right">
+
+                {% bootstrap_button "Cancel" button_type="link" name="cancel" href=cancel_url button_class="btn btn-warning" %}
+
+                {% bootstrap_button "Delete" button_type="link" name="delete" button_class="btn btn-danger" %}
+            </div>
+        </form>
+    </div>
+{% endblock page_content %}

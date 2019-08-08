@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load bootstrap3 static_tags %}
+{% block title %}Customer{% endblock title %}
+{% block page_content %}
+
+    <div class="panel">
+        <div class="panel-body">
+            {% csrf_token %}
+            <fieldset class="col-sm-6">
+                {% static_field object "first_name" %}
+                {% static_field object "last_name" %}
+                {% static_field object "city" %}
+                {% static_field object "state" %}
+                {% static_field object "zip" %}
+                {% static_field object "phone" %}
+            </fieldset>
+        </div>
+    </div>
+
+    {% if perms.update_customer %}
+        <div class="col-xs-5 page-header-buttons">
+            <a href="{% url 'customers:customer_update' object.id %}" class="btn btn-default btn-purple">
+                <span class="fa fa-edit"></span> Edit</a>
+        </div>
+    {% endif %}
+
+{% endblock page_content %}
+
