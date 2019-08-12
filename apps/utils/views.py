@@ -1,5 +1,5 @@
 import logging
-
+from django.http import QueryDict
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views import View
@@ -62,8 +62,10 @@ class FilterView(View):
         draw = int(request.POST.get('draw', '0'))
         start = int(request.POST.get('start', '0'))
         length = int(request.POST.get('length', '0'))
+        values = QueryDict(request.body.decode('utf-8').replace('%5B%5D', ''))
+
         f = (
-            self.filter_class(request.POST, queryset=self.object_class.objects.all())
+            self.filter_class(values, queryset=self.object_class.objects.all())
                 .qs.values(*self.values)
                 .order_by(*order_list)
         )
