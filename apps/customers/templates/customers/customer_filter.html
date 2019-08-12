@@ -12,14 +12,6 @@
         $(document).ready(function () {
             //sets focus to first input
             $('input[type=text],select').filter(':visible:first').focus();
-
-            // remove has-success, highlights filter fields
-            $(".has-success").each(function (index) {
-                $(this).removeClass('has-success');
-            });
-
-            $('#id_date_from').datetimepicker({format: 'L'});
-            $('#id_date_to').datetimepicker({format: 'L'});
         });
 
         //Bind keypress event
