@@ -1,4 +1,3 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, render, redirect, reverse
 from django.views import View
 from django.views.generic import UpdateView, CreateView, DetailView
@@ -7,7 +6,7 @@ from apps.utils.views import FilterView
 from . import forms, filters, models, helpers
 
 
-class CustomerFilterView(LoginRequiredMixin, FilterView):
+class CustomerFilterView(FilterView):
     sorting = {0: ['last_name'], 1: ['first_name']}
     values = ('pk',)
     object_class = models.Customer
@@ -26,24 +25,24 @@ class CustomerFilterView(LoginRequiredMixin, FilterView):
         return result
 
 
-class CustomerDetailView(LoginRequiredMixin, DetailView):
+class CustomerDetailView(DetailView):
     template_name = 'customers/customer_detail.html'
     queryset = models.Customer.objects.all()
 
 
-class CustomerUpdateView(LoginRequiredMixin, UpdateView):
+class CustomerUpdateView(UpdateView):
     template_name = 'customers/customer_update.html'
     queryset = models.Customer.objects.all()
     form_class = forms.CustomerForm
 
 
-class CustomerCreateView(LoginRequiredMixin, CreateView):
+class CustomerCreateView(CreateView):
     template_name = 'customers/customer_update.html'
     model = models.Customer
     form_class = forms.CustomerForm
 
 
-class CustomerDeleteView(LoginRequiredMixin, View):
+class CustomerDeleteView(View):
     object_class = models.Customer
 
     def get(self, request, pk):

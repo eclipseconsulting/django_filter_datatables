@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'active_link',
     'bootstrap3',
-    'apps.accounts',
     'apps.utils',
     'apps.customers',
 ]
@@ -114,9 +113,7 @@ DATE_FORMAT = 'm/d/Y'
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-AUTH_USER_MODEL = 'accounts.User'
 
-LOGIN_URL = reverse_lazy('accounts:login')
 LOGIN_REDIRECT_URL = reverse_lazy('index')
 LOGOUT_REDIRECT_URL = reverse_lazy('index')
 
