@@ -10,7 +10,6 @@ handler500 = views.handler500
 
 urlpatterns = [
     path('', views.Index.as_view(), name='index'),
-    path('accounts/', include('apps.accounts.urls')),
     path('customers/', include('apps.customers.urls')),
     path('admin/', admin.site.urls),
 ]

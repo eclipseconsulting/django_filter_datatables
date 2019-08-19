@@ -1,11 +1,10 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseServerError
 from django.shortcuts import render
 from django.template import loader
 from django.views import View
 
 
-class Index(LoginRequiredMixin, View):
+class Index(View):
     def get(self, request):
         return render(request, 'index.html')
 
